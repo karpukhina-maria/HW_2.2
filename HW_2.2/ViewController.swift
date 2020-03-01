@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         blueValue.text = String(format:"%.2f", blueSlider.value)
         changeViewBackground()
     }
-    
+        
     func changeViewBackground() {
         rgbView.backgroundColor = UIColor.init(red: CGFloat(redSlider.value),
                                                green: CGFloat(greenSlider.value),
