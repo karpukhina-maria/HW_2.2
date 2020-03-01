@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .darkGray
+        
 //      Sliders
         redSlider.minimumValue = 0
         redSlider.maximumValue = 1
@@ -38,7 +40,8 @@ class ViewController: UIViewController {
         greenSlider.value = 0
         greenSlider.minimumTrackTintColor = .green
 
-//        rgbView
+//      View
+        rgbView.layer.cornerRadius = 10
         rgbView.backgroundColor = UIColor.init(red: CGFloat(redSlider.value),
                                                green: CGFloat(greenSlider.value),
                                                blue: CGFloat(blueSlider.value),
@@ -64,15 +67,9 @@ class ViewController: UIViewController {
     }
     
     func changeViewBackground() {
-        let currentRedColor = redSlider.value
-        print(String(currentRedColor))
-        let currentGreenColor = greenSlider.value
-        print(String(currentGreenColor))
-        let currentBlueColor = blueSlider.value
-        print(String(currentBlueColor))
-        rgbView.backgroundColor = UIColor.init(red: CGFloat(currentRedColor),
-                                               green: CGFloat(currentGreenColor),
-                                               blue: CGFloat(currentBlueColor),
+        rgbView.backgroundColor = UIColor.init(red: CGFloat(redSlider.value),
+                                               green: CGFloat(greenSlider.value),
+                                               blue: CGFloat(blueSlider.value),
                                                alpha: CGFloat(1.0))
 
     }
