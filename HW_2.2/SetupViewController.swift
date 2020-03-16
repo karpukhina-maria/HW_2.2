@@ -1,15 +1,13 @@
-//
-//  ViewController.swift
-//  HW_2.2
-//
-//  Created by Mary Jane on 27.02.2020.
-//  Copyright © 2020 Maria Karpukhina. All rights reserved.
-//
-
 import UIKit
 
-class ViewController: UIViewController {
-    
+protocol SetupViewControllerDelegate {
+    func updateBGcolor(redColor2 valueRed: Float,
+                       greenColor2 valueGreen: Float,
+                       blueColor2 valueBlue: Float)
+}
+
+class SetupViewController: UIViewController {
+
     @IBOutlet var redSlider: UISlider!
     @IBOutlet var redValue: UILabel!
     @IBOutlet var greenSlider: UISlider!
@@ -19,25 +17,23 @@ class ViewController: UIViewController {
     
     @IBOutlet var rgbView: UIView!
     
+    var redColorValue: Float = 0.0
+    var greenColorValue: Float = 0.0
+    var blueColorValue: Float = 0.0
+    
+    var delegate: SetupViewControllerDelegate!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .darkGray
-        
 //      Sliders
-        redSlider.minimumValue = 0
-        redSlider.maximumValue = 1
-        redSlider.value = 0
+        redSlider.value = redColorValue
         redSlider.minimumTrackTintColor = .red
         
-        blueSlider.minimumValue = 0
-        blueSlider.maximumValue = 1
-        blueSlider.value = 0
+        blueSlider.value = blueColorValue
         blueSlider.minimumTrackTintColor = .blue
         
-        greenSlider.minimumValue = 0
-        greenSlider.maximumValue = 1
-        greenSlider.value = 0
+        greenSlider.value = greenColorValue
         greenSlider.minimumTrackTintColor = .green
 
 //      View
@@ -51,25 +47,36 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func DoneButtonPresed() {
+        delegate.updateBGcolor(redColor2: redColorValue,
+                               greenColor2: greenColorValue,
+                               blueColor2: blueColorValue)
+        dismiss(animated: true)
+//        dismiss(animated: false, completion: nil)
+    }
+    
     @IBAction func redSliderAction() {
+        redColorValue = redSlider.value
         redValue.text = String(format:"%.2f", redSlider.value)
         changeViewBackground()
     }
     
     @IBAction func greenSliderAction() {
+        greenColorValue = greenSlider.value
         greenValue.text = String(format:"%.2f", greenSlider.value)
         changeViewBackground()
     }
     
     @IBAction func blueSliderAction() {
+        blueColorValue = blueSlider.value
         blueValue.text = String(format:"%.2f", blueSlider.value)
         changeViewBackground()
     }
         
     func changeViewBackground() {
-        rgbView.backgroundColor = UIColor.init(red: CGFloat(redSlider.value),
-                                               green: CGFloat(greenSlider.value),
-                                               blue: CGFloat(blueSlider.value),
+        rgbView.backgroundColor = UIColor.init(red: CGFloat(redColorValue),
+                                               green: CGFloat(greenColorValue),
+                                               blue: CGFloat(blueColorValue),
                                                alpha: CGFloat(1.0))
 
     }
